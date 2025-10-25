@@ -66,6 +66,3 @@ Thumbs.db
 
 # Streamlit secrets (keep configs if needed)
 .streamlit/secrets.toml
-
-# Data artifacts (dataset download)
-survey_results_public.csv
