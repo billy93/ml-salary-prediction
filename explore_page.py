@@ -50,10 +50,14 @@ def load_data():
     df = df.rename({"ConvertedComp": "Salary"}, axis=1)
     return df
 
-df = load_data()
+# Remove eager loading to avoid FileNotFoundError when CSV is missing
+# df = load_data()
 
 def show_explore_page():
     st.title("Explore Software Engineer Salaries")
+
+    # Lazily load data when the page is shown
+    df = load_data()
 
     st.write(
         """
@@ -77,7 +81,7 @@ def show_explore_page():
     """
     )
 
-    data = df.groupby(["Country"])["Salary"].mean().sort_values(ascending=True)
+    data = df.groupby(["Country"]) ["Salary"].mean().sort_values(ascending=True)
     st.bar_chart(data)
 
     st.write(
@@ -86,6 +90,6 @@ def show_explore_page():
     """
     )
 
-    data = df.groupby(["YearsCodePro"])["Salary"].mean().sort_values(ascending=True)
+    data = df.groupby(["YearsCodePro"]) ["Salary"].mean().sort_values(ascending=True)
     st.line_chart(data)
 
